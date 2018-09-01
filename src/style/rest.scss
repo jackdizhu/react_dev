@@ -1,0 +1,210 @@
+
+/*全局css样式*/
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-family: "Helvetica Neue For Number", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+a {
+  text-decoration: none;
+}
+.gybxs {
+  display: none!important;
+}
+
+@mixin hengpai($font:14px,$zhong:middle,$div:div){
+  font-size: 0;
+  >#{$div}{
+    font-size:$font;
+    display: inline-block;
+    vertical-align: $zhong;
+  }
+}
+
+@mixin hp($al:center,$ju:space-between){
+  display: flex;
+  align-items: $al;
+  justify-content: $ju;
+  font-size: 0\0;
+  >div{
+    display: inline-block\0;
+    font-size: 14px\0;
+    @if $al == flex-end{
+      vertical-align: bottom\0;
+    }@else if $al == flex-start{
+      vertical-align: top\0;
+    }@else {
+      vertical-align: middle\0;
+    }
+  }
+}
+
+%chaochu {
+  display:block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin ie7juzhong($gao:auto,$zhong2:middle,$div:div) {
+  *height: $gao;
+  >#{$div} {
+    *display: inline;
+    *zoom: 1;
+  }
+
+  &:after {
+    content: '';
+    width: 0;
+    font-size: 0;
+    height: 100%;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: $zhong2;
+  }
+}
+@mixin hh($value,$hang:1,$hidden:hidden) {
+  height: $value;
+  line-height: $value / $hang;
+  overflow: $hidden;
+}
+@mixin juzhong($width){
+  width: $width;
+  margin: 0 auto;
+}
+
+@mixin btn($value1,$value2:#fff) {
+  background: $value1;
+  color: $value2;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover{
+    background: darken($value1,10%);
+  }
+}
+
+@mixin lists($width,$value,$font:14px) {
+  padding: 0 $value/2;
+  font-size: 0;
+  @include hengpai($font);
+  >div {
+    width: 100% / $width - $value;
+    margin: 0 $value/2;
+  }
+}
+.mask{
+  background: #000;
+  opacity: 0.7;
+  position: fixed;
+  width: 100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index: 998;
+}
+@keyframes xianshi
+{
+  from {opacity: 0;transform: rotateY(0deg)}
+  to {opacity: 0.95;transform: rotateY(360deg)}
+}
+
+.flexCenterCen {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.flex1 {
+   -webkit-flex: 1;
+   flex: 1;
+}
+// 横向 对齐方式
+.justify-around {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+.justify-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.justify-center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.justify-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+.justify-start {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+// 纵向 对齐方式
+.items-stretch {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+.items-baseline {
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+}
+.items-center, .flex-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.items-end {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+.items-start {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+// 多行内容 上下对齐方式
+.content-around {
+    -ms-flex-line-pack: distribute;
+    align-content: space-around;
+}
+.content-between {
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+}
+.content-center {
+    -ms-flex-line-pack: center;
+    align-content: center;
+}
+.content-end {
+    -ms-flex-line-pack: end;
+    align-content: flex-end;
+}
+.content-start {
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+}
