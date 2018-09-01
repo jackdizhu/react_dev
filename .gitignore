@@ -26,3 +26,4 @@ config.json
 mytest/*
 dist/*
 !dist/.gitkeep
+package-lock.json
