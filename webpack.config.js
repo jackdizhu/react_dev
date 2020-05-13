@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require("webpack");
-var pro = process.env.NODE_ENV == "production" ? true : false
+var prod = process.env.NODE_ENV == "production" ? true : false
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -12,7 +12,7 @@ var url = "localhost"
 
 //不同环境加载不同的插件
 let plg = [];
-if (pro) {
+if (prod) {
     plg = [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, '/src/index.html') // Load a custom template
@@ -63,7 +63,7 @@ module.exports = {
             }
         }
     },
-    plugins:plg,
+    plugins: plg,
     resolve: {
         extensions: ['.jsx', '.js', '.less', '.scss', '.css'],
         modules: [
@@ -71,6 +71,7 @@ module.exports = {
             path.join(__dirname, './src')
         ],
         alias: {
+            "$less": path.resolve(__dirname, "src/less"),
             "actions": path.resolve(__dirname, "src/actions"),
             "components": path.resolve(__dirname, "src/components"),
             "containers": path.resolve(__dirname, "src/containers"),
@@ -79,54 +80,66 @@ module.exports = {
         }
     },
     output: {
-        filename: pro ? '[name].[hash].js' : '[name].js',
+        filename: prod ? '[name].[hash].js' : '[name].js',
         path: path.join(__dirname, 'build'),
-        publicPath: pro ? './' : `http://${url}:${dev_port}/build/`
+        publicPath: prod ? './' : `http://${url}:${dev_port}/build/`
     },
     devtool: false,
     module: {
-        rules: [{
-            test: /\.js?$/,
-            exclude: /(node_modules)/,
-            use: ['babel-loader']
-        }, {
-            test: /\.scss/,
-            use: [MiniCssExtractPlugin.loader, {
-                loader: 'css-loader?importLoaders=1',
-                options: {
-                    minimize: true //css压缩
-                }
-            }, "sass-loader"]
-        }, {
-            test: /\.(less|css)$/,
-            use: [MiniCssExtractPlugin.loader, {
-                loader: 'css-loader?importLoaders=1',
-                options: {
-                    minimize: true //css压缩
-                }
-            }, {loader: 'less-loader', options: {javascriptEnabled: true}}]
-        }, {
-            test: /\.(png|jpg|gif|md)$/,
-            use: ['file-loader?limit=10000&name=[md5:hash:base64:10].[ext]']
-        }, {
-            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-            use: ['url-loader?limit=10000&mimetype=images/svg+xml']
-        }, {
-            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "url-loader?limit=10000&mimetype=application/font-woff"
-        }, {
-            test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "file-loader"
-        }, {
-            test: /\.json$/,
-            use: "json-loader"
-        }]
+        rules: [
+            // {  
+            //     test: /\.jsx?$/, 
+            //     enforce: 'pre',  
+            //     loader: "eslint-loader",
+            //     include: /src/
+            // },
+            {
+                test: /\.js?$/,
+                exclude: /(node_modules)/,
+                use: ['babel-loader', {
+                    loader: 'eslint-loader'
+                }]
+            }, {
+                test: /\.scss/,
+                use: [MiniCssExtractPlugin.loader, {
+                    loader: 'css-loader?importLoaders=1',
+                    options: {
+                        minimize: true //css压缩
+                    }
+                }, "sass-loader"]
+            }, {
+                test: /\.(less|css)$/,
+                use: [MiniCssExtractPlugin.loader, {
+                    loader: 'css-loader?importLoaders=1',
+                    options: {
+                        minimize: true //css压缩
+                    }
+                }, { loader: 'less-loader', options: { javascriptEnabled: true, modules: true } }]
+            },
+            {
+                test: /\.(png|jpg|gif|md)$/,
+                use: ['file-loader?limit=10000&name=[md5:hash:base64:10].[ext]']
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                use: ['url-loader?limit=10000&mimetype=images/svg+xml']
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+            }, {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            }, {
+                test: /\.json$/,
+                use: "json-loader"
+            }]
     },
     devServer: {//webpack-dev-server配置热更新以及跨域
         historyApiFallback: true,//不跳转
         noInfo: true,
         inline: true,//实时刷新
-        host:url,
+        host: url,
         port: dev_port,
         hot: true,
         proxy: {

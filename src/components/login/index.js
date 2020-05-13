@@ -9,6 +9,7 @@ import * as index_act from "../../actions/index";
 import history from '../public/history';
 import { mapstate } from "../../reducers/com"
 import { qus } from 'esn'
+import '$less/login.module.less'
 
 const FormItem = Form.Item
 
