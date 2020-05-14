@@ -1,16 +1,15 @@
-import React from 'react';
-import { Table, Modal, Button } from 'antd';
-import { bindActionCreators } from "redux"
-import { connect } from "react-redux"
-import * as index_act from "../../actions/index";
-import history from '../public/history';
-import { mapstate } from "../../reducers/com"
-import { qus } from 'esn'
-
+import React from 'react'
+// import { Table, Modal, Button } from 'antd';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as index_act from '../../actions/index'
+import history from '../public/history'
+import { mapstate } from '../../reducers/com'
+// import { qus } from 'esn'
 
 class GoodsList extends React.PureComponent {
-  constructor(arg) {
-    super(arg);
+  constructor (arg) {
+    super(arg)
     this.state = {
       list: []
     }
@@ -27,7 +26,7 @@ class GoodsList extends React.PureComponent {
     })
   }
 
-  handleCheckList = (data, index) => {
+  handleCheckList = (data) => {
     return () => {
       this.props.actions_checkList(data)
       // setTimeout(() => {
@@ -37,18 +36,18 @@ class GoodsList extends React.PureComponent {
     }
   }
 
-  render() {
+  render () {
     let list = this.state.list.map((data, index) => (
-      <div key={index} className='list' onClick={this.handleCheckList(data, index)}>
-        <div className='list-con'>
+      <div key={index} className="list" onClick={this.handleCheckList(data, index)}>
+        <div className="list-con">
           <div className="list_img">
-            <img src={data.img}/>
+            <img src={data.img} />
           </div>
           <div className="list_tit">{data.name}</div>
         </div>
       </div>))
     return (
-      <div className='GoodsList'>
+      <div className="GoodsList">
         <div className="neiye">
           <h1>商品列表</h1>
         </div>
@@ -60,9 +59,8 @@ class GoodsList extends React.PureComponent {
   }
 }
 
-function bindact(dispatch) {
+function bindact (dispatch) {
   return bindActionCreators(index_act, dispatch)
 }
 
-
-export default connect(mapstate, bindact)(GoodsList);
+export default connect(mapstate, bindact)(GoodsList)

@@ -1,8 +1,7 @@
-// import createHistory from 'history/createBrowserHistory';
 import {
-  createBrowserHistory,
-  createHashHistory,
-  createMemoryHistory
+  // createBrowserHistory,
+  createHashHistory
+  // createMemoryHistory
 } from 'history'
 
-export default createHashHistory();
+export default createHashHistory()

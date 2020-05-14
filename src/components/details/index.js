@@ -1,15 +1,14 @@
-import React from 'react';
-import { Table, Modal, Button } from 'antd';
-import { bindActionCreators } from "redux"
-import { connect } from "react-redux"
-import * as index_act from "../../actions/index";
-import { mapstate } from "../../reducers/com"
-import { qus } from 'esn'
-
+import React from 'react'
+// import { Table, Modal, Button } from 'antd';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as index_act from '../../actions/index'
+import { mapstate } from '../../reducers/com'
+// import { qus } from 'esn'
 
 class GoodsDetails extends React.PureComponent {
-  constructor(arg) {
-    super(arg);
+  constructor (arg) {
+    super(arg)
     this.state = {
       details: {}
     }
@@ -26,27 +25,27 @@ class GoodsDetails extends React.PureComponent {
     })
   }
 
-  render() {
+  render () {
     return (
-      <div className='GoodsDetails'>
+      <div className="GoodsDetails">
         <div className="neiye">
           <h1>商品详情</h1>
         </div>
         <div className="details-box">
           {
             this.state.details.name ?
-              <div className='details-head flex justify-start items-start content-start'>
+              <div className="details-head flex justify-start items-start content-start">
                 <div className="img-box">
                   <img src={this.state.details.img} width="400px" />
                 </div>
                 <div className="tit-box">
-                  <div className='tit'>
+                  <div className="tit">
                     {this.state.details.name}
                     <span>
                       ({this.state.details.typeName})
                     </span>
                   </div>
-                  <dl className='dl1'>
+                  <dl className="dl1">
                     <dt>
                       主料:
                     </dt>
@@ -64,7 +63,7 @@ class GoodsDetails extends React.PureComponent {
                       </span>
                     </dd>
                   </dl>
-                  <dl className='dl1'>
+                  <dl className="dl1">
                     <dt>
                       辅料:
                     </dt>
@@ -82,7 +81,7 @@ class GoodsDetails extends React.PureComponent {
                       </span>
                     </dd>
                   </dl>
-                  <dl className='dl2'>
+                  <dl className="dl2">
                     <dt>
                       做法:
                     </dt>
@@ -100,18 +99,16 @@ class GoodsDetails extends React.PureComponent {
                   </dl>
                 </div>
               </div>
-            : ''
+              : ''
           }
-
         </div>
       </div>
     )
   }
 }
 
-function bindact(dispatch) {
+function bindact (dispatch) {
   return bindActionCreators(index_act, dispatch)
 }
 
-
-export default connect(mapstate, bindact)(GoodsDetails);
+export default connect(mapstate, bindact)(GoodsDetails)
