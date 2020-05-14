@@ -12,8 +12,6 @@ class Page1 extends React.Component {
     super(arg)
   }
 
-  componentWillMount = () => {
-  }
   render () {
     return (
       <div className="zhuye">

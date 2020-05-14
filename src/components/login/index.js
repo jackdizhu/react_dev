@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as index_act from '../../actions/index'
 import history from '../public/history'
 import { mapstate } from '../../reducers/com'
+import FormButton from './button'
 // import { qus } from 'esn'
 import '$less/login.module.less'
 
@@ -14,6 +15,7 @@ class LoginForm extends React.Component {
   constructor (arg) {
     super(arg)
     this.state = {
+      test: 0,
       username: '',
       password: '',
       checkbox: false
@@ -50,6 +52,10 @@ class LoginForm extends React.Component {
       })
     }
   }
+  // 传递方法到子组件
+  callBack = (data) => {
+    this.setState(data)
+  }
 
   render () {
     return (
@@ -58,6 +64,7 @@ class LoginForm extends React.Component {
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               <Input
+                value={this.state.username}
                 onChange={this.handleUsername}
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Username"
@@ -78,6 +85,7 @@ class LoginForm extends React.Component {
                 <a href="" style={{ float: 'right' }}>立即注册</a>
               </div>
               <div className="btn-box">
+                <FormButton username={this.state.username} callBack={this.callBack}></FormButton>
                 <Button type="primary" htmlType="submit" className="login-form-button">
                   登录
                 </Button>

@@ -8,10 +8,6 @@ export default class Foot extends React.Component {
     super(arg)
   }
 
-  componentWillMount = () => {
-
-  }
-
   render () {
     return (
       <div className="foot">

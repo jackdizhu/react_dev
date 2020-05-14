@@ -7,9 +7,6 @@ export default class Head extends React.Component {
     super(arg)
   }
 
-  componentWillMount = () => {
-
-  }
   render () {
     return (
       <div className="head">

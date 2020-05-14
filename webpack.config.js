@@ -33,7 +33,6 @@ if (prod) {
   ]
 }
 
-
 module.exports = {
   entry: {
     index: ['babel-polyfill', './src/index.js']
