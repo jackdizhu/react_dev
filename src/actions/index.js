@@ -29,7 +29,7 @@ export function actions_checkList (data) {
 }
 
 //整合的一个get请求
-export const post = (url = '', parm = {}, chenggong = function () {
+export const post = (url = '', parm = {}, callBack = function () {
 }, erro = () => { }) => async (dispatch, getState) => {
   try {
     NProgress.start()
@@ -37,21 +37,23 @@ export const post = (url = '', parm = {}, chenggong = function () {
     //await console.log(response.data)
     await function (response) {
       if (val_empty(response.data)) {
-        chenggong(response, dispatch, getState)
+        callBack(response, dispatch, getState)
       } else {
         erro()
         notification['error']({
           message: '警告',
           description: response.data.errorMsg
         })
+        callBack(null, dispatch, getState)
       }
       NProgress.done()
     }(response)
   } catch (error) {
     console.log('error: ', error)
+    callBack(null, dispatch, getState)
   }
 }
-export const get = (url = '', parm = {}, chenggong = function () {
+export const get = (url = '', parm = {}, callBack = function () {
 }, erro = () => { }) => async (dispatch, getState) => {
   try {
     NProgress.start()
@@ -59,17 +61,19 @@ export const get = (url = '', parm = {}, chenggong = function () {
     //await console.log(response.data)
     await function (response) {
       if (val_empty(response.data)) {
-        chenggong(response, dispatch, getState)
+        callBack(response, dispatch, getState)
       } else {
         erro()
         notification['error']({
           message: '警告',
           description: response.data.errorMsg
         })
+        callBack(null, dispatch, getState)
       }
       NProgress.done()
     }(response)
   } catch (error) {
     console.log('error: ', error)
+    callBack(null, dispatch, getState)
   }
 }

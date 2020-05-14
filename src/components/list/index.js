@@ -19,10 +19,22 @@ class GoodsList extends React.PureComponent {
     this.props.get('https://www.easy-mock.com/mock/5b7bbed645458a5efea87c82/api/get_listRandom', {
     }, (data) => {
       // this.props.act_list(data.data.data)
-      this.setState({
-        list: data.data.data
-      })
-      // console.log(this.state.list, 1111);
+      if (data && data.data && data.data.data) {
+        this.setState({
+          list: data.data.data
+        })
+      } else {
+        let arr = []
+        for (let i = 0; i < 6; i++) {
+          arr.push({
+            img: 'https://create-react-app.dev/img/logo.svg',
+            name: '测试名称__' + i
+          })
+        }
+        this.setState({
+          list: arr
+        })
+      }
     })
   }
 
@@ -35,6 +47,19 @@ class GoodsList extends React.PureComponent {
       history.push('/details')
     }
   }
+  onDelete (index, e) {
+    e.stopPropagation()
+    // let list = this.state.list
+    // let { list } = this.state
+    let list = [...this.state.list]
+    list.splice(index, 1)
+    this.setState({
+      list: list
+    })
+  }
+  onDeleteFn (e, index) {
+    this.onDelete(index, e)
+  }
 
   render () {
     let list = this.state.list.map((data, index) => (
@@ -43,9 +68,13 @@ class GoodsList extends React.PureComponent {
           <div className="list_img">
             <img src={data.img} />
           </div>
-          <div className="list_tit">{data.name}</div>
+          <div className="list_tit">
+            {data.name}
+            <span style={{ 'float': 'right' }} onClick={this.onDelete.bind(this, index)}> 删除</span>
+            <span style={{ 'float': 'right' }} onClick={e => this.onDeleteFn(e, index)}> 删除</span>
+          </div>
         </div>
-      </div>))
+      </div >))
     return (
       <div className="GoodsList">
         <div className="neiye">
