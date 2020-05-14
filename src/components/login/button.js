@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import '$less/button.module.less'
 
 class FormButton extends React.Component {
@@ -23,6 +24,12 @@ class FormButton extends React.Component {
       </div>
     )
   }
+}
+// 定义组件props类型
+FormButton.propTypes = {
+  show: PropTypes.bool,
+  username: PropTypes.string,
+  callBack: PropTypes.func
 }
 
 export default FormButton

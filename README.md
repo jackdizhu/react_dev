@@ -5,6 +5,26 @@
 * 通过props属性传递属性、方法到子组件
 * 子组件通过调用父级组件传入的方法通知/修改父级组件属性
 
+## 定义props类型
+
+* 通过引入prop-types模块处理
+
+```js
+import React from 'react'
+import PropTypes from 'prop-types'
+class FormButton extends React.Component {
+  constructor () {
+    super()
+  }
+}
+// 定义组件props类型
+FormButton.propTypes = {
+  show: PropTypes.bool,
+  username: PropTypes.string,
+  callBack: PropTypes.func
+}
+```
+
 ## 生命周期
 
 ### 挂载卸载过程
