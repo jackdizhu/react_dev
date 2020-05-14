@@ -8,8 +8,11 @@ import { mapstate } from '../../reducers/com'
 import FormButton from './button'
 // import { qus } from 'esn'
 import '$less/login.module.less'
+import InputFn from './inputFn'
 
 const FormItem = Form.Item
+const Input0 = InputFn(Input, /^[0-9]+$/, '请输入数字')
+const InputA0 = InputFn(Input, /^[a-zA-Z0-9]+$/, '请输入英文或数字')
 
 class LoginForm extends React.Component {
   constructor (arg) {
@@ -63,6 +66,18 @@ class LoginForm extends React.Component {
         <div style={{ width: '300px', height: '480px' }}>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
+              <InputA0
+                value={this.state.username}
+                onChange={this.handleUsername}
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Username"
+              />
+              <Input0
+                value={this.state.username}
+                onChange={this.handleUsername}
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Username"
+              />
               <Input
                 value={this.state.username}
                 onChange={this.handleUsername}

@@ -177,6 +177,53 @@ const mapDispatchToProps = (dispatch) => {
 // options：通过配置项可以更加详细的定义connect的行为，通常只需要执行默认值
 ```
 
+## 高阶组件
+
+```js
+import React from 'react'
+function InputFn (Component, reg, msg) {
+  // 缓存value
+  let $val = ''
+  return class Input extends React.Component {
+    constructor () {
+      super()
+      this.state = {
+        reg: reg || /^[0-9a-zA-Z]*$/,
+        msg: msg || '高阶组件只能输入限定字符'
+      }
+    }
+    check (val) {
+      return this.state.reg.test(val)
+    }
+    onChange (e) {
+      let val = e.target.value
+      if (this.check(val)) {
+        this.props.onChange(e)
+      }
+    }
+    setValue (val) {
+      if (this.check(val)) {
+        $val = val
+        return val
+      } else {
+        return $val
+      }
+    }
+    render () {
+      return (
+        <Component
+          {...this.props}
+          value={this.setValue.call(this, this.props.value)}
+          onChange={this.onChange.bind(this)}
+          placeholder={this.state.msg}
+        ></Component>
+      )
+    }
+  }
+}
+export default InputFn
+```
+
 ## 注意事项
 
 * 不要在render的函数中绑定值（父组件更新时会产生新的方法，更新子组件 不好）
