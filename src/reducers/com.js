@@ -1,6 +1,3 @@
-/**
- * Created by zengtao on 2017/5/12.
- */
 
 
 export function mapstate(state) {

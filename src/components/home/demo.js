@@ -1,6 +1,3 @@
-/**
- * Created by zengtao on 2017/5/19.
- */
 import React from 'react';
 import { Button, Input, Alert } from 'antd';
 import { bindActionCreators } from "redux"
