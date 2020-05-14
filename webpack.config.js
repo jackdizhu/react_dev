@@ -107,13 +107,24 @@ module.exports = {
           }
         }, 'sass-loader']
       }, {
-        test: /\.(less|css)$/,
+        test: /[^module]+\.(less|css)$/,
         use: [MiniCssExtractPlugin.loader, {
           loader: 'css-loader?importLoaders=1',
           options: {
             minimize: true //css压缩
           }
-        }, { loader: 'less-loader', options: { javascriptEnabled: true, modules: true } }]
+        }, { loader: 'less-loader', options: { javascriptEnabled: true, modules: false } }]
+      },
+      {
+        test: /\.module.less$/,
+        use: [MiniCssExtractPlugin.loader, {
+          loader: 'css-loader?importLoaders=1',
+          options: {
+            modules: true,
+            localIdentName: '[local]__[hash:base64:5]',
+            minimize: true //css压缩
+          }
+        }, { loader: 'less-loader', options: { modules: true } }]
       },
       {
         test: /\.(png|jpg|gif|md)$/,

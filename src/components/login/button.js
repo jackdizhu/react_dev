@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '$less/button.module.less'
+import '$less/button.less'
+import $less from '$less/button.module.less'
 
 class FormButton extends React.Component {
   constructor () {
@@ -16,10 +17,18 @@ class FormButton extends React.Component {
   }
   render () {
     return (
-      <div className="form-test">
-        <p>双向绑定、父子组件通信测试</p>
-        <div className="form-test-btn" onClick={this.usernameShift.bind(this)}>
-          {this.props.username || '测试按钮'}
+      <div>
+        <div className="form-test">
+          <p>双向绑定、父子组件通信测试</p>
+          <div className="form-test-btn" onClick={this.usernameShift.bind(this)}>
+            {this.props.username || '测试按钮'}
+          </div>
+        </div>
+        <div className={$less['form-test']}>
+          <p>Css scoped/module</p>
+          <div className={$less['form-test-btn']} onClick={this.usernameShift.bind(this)}>
+            {this.props.username || '测试按钮'}
+          </div>
         </div>
       </div>
     )

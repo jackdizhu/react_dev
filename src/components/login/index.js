@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
   render () {
     return (
       <div style={{ width: '100%', height: '100%' }} className="LoginForm">
-        <div style={{ width: '300px', height: '260px' }}>
+        <div style={{ width: '300px', height: '480px' }}>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
               <Input
