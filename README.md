@@ -23,6 +23,12 @@ FormButton.propTypes = {
   username: PropTypes.string,
   callBack: PropTypes.func
 }
+// 定义组件props默认值
+FormButton.defaultProps = {
+  show: true,
+  username: '',
+  callBack: () => { }
+}
 ```
 
 ## 生命周期

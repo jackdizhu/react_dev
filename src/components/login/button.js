@@ -18,18 +18,21 @@ class FormButton extends React.Component {
   render () {
     return (
       <div>
-        <div className="form-test">
-          <p>双向绑定、父子组件通信测试</p>
-          <div className="form-test-btn" onClick={this.usernameShift.bind(this)}>
-            {this.props.username || '测试按钮'}
-          </div>
-        </div>
-        <div className={$less['form-test']}>
-          <p>Css scoped/module</p>
-          <div className={$less['form-test-btn']} onClick={this.usernameShift.bind(this)}>
-            {this.props.username || '测试按钮'}
-          </div>
-        </div>
+        {
+          this.props.show ?
+            <div className="form-test">
+              <p>双向绑定、父子组件通信测试</p>
+              <div className="form-test-btn" onClick={this.usernameShift.bind(this)}>
+                {this.props.username || '测试按钮'}
+              </div>
+            </div> :
+            <div className={$less['form-test']}>
+              <p>Css scoped/module</p>
+              <div className={$less['form-test-btn']} onClick={this.usernameShift.bind(this)}>
+                {this.props.username || '测试按钮'}
+              </div>
+            </div>
+        }
       </div>
     )
   }
@@ -39,6 +42,12 @@ FormButton.propTypes = {
   show: PropTypes.bool,
   username: PropTypes.string,
   callBack: PropTypes.func
+}
+// 定义组件props默认值
+FormButton.defaultProps = {
+  show: true,
+  username: '',
+  callBack: () => { }
 }
 
 export default FormButton

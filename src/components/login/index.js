@@ -85,7 +85,7 @@ class LoginForm extends React.Component {
                 <a href="" style={{ float: 'right' }}>立即注册</a>
               </div>
               <div className="btn-box">
-                <FormButton username={this.state.username} callBack={this.callBack}></FormButton>
+                <FormButton show={this.state.checkbox} username={this.state.username} callBack={this.callBack}></FormButton>
                 <Button type="primary" htmlType="submit" className="login-form-button">
                   登录
                 </Button>
